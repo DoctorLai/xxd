@@ -85,7 +85,7 @@ void print_xxd(string content, int w = 16, bool upper = false) {
     }
     for (int i = 0; i < curline.size(); i ++) {
         char t = content[i ++];
-        if ((int)t <= 32) { // non-printable characters
+        if ((int)t < 32) { // non-printable characters
             t = '.';
         }
         cout << t;
