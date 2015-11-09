@@ -12,6 +12,7 @@ void help() {
     cout << "visit https://HelloACM.com" << endl;
     cout << "-u uppercase" << endl;
     cout << "-c column" << endl;
+    cout << "-h help" << endl;
 }
 
 inline bool file_exists(const string& name) {
@@ -63,7 +64,7 @@ void print_xxd(string content, int w = 16, bool upper = false) {
             int k = i - w + 1;
             for (int j = 0; j < w; j ++) {
                 t = content[k ++];
-                if ((int)t <= 32) { // non-printable characters
+                if ((int)t < 32) { // non-printable characters
                     t = '.';
                 }
                 cout << t;
