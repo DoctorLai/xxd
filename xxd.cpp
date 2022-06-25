@@ -20,7 +20,7 @@ inline bool file_exists(const string& name) {
     return (stat (name.c_str(), &buffer) == 0);
 }
 
-string tohex(int x, int w = 7, bool upper = false) {
+string tohex(int x, int w = 8, bool upper = false) {
     stringstream stream;
     stream << std::hex << (x & 0xFF);
     string result(stream.str());
@@ -35,7 +35,7 @@ string tohex(int x, int w = 7, bool upper = false) {
 }
 
 void print_xxd(string content, int w = 16, bool upper = false) {
-    int len = content.size();
+    int len = static_cast<int>(content.size());
     int num = 0;
     string curline = "";
     int width = 9 + (w / 2) * 5 + 1;
@@ -79,12 +79,12 @@ void print_xxd(string content, int w = 16, bool upper = false) {
         }
     }
     // remaining characters;
-    int j = width - cw + 1;
+    int j = width - cw;
     while (j-- > 0) {
         cout << " ";
     }
-    for (int i = 0; i < curline.size(); i ++) {
-        char t = content[i ++];
+    for (int i = 0; i < static_cast<int>(curline.size()); i ++) {
+        char t = content[i];
         if ((int)t < 32) { // non-printable characters
             t = '.';
         }
@@ -168,9 +168,10 @@ int main(int argc, char ** argv)
         std::string all = "";
         while (std::getline(std::cin, line))
         {
-            all += line;
+            all += line + "\n";
         }
         print_xxd(all, w, upper);
+		cout << endl;
     }
     return 0;
 }
